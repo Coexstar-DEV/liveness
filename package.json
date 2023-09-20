@@ -1,8 +1,13 @@
 {
   "dependencies": {
+    "body-parser": "^1.20.2",
     "express": "^4.18.2",
-    "pg": "^8.11.2",
+    "pg": "^8.11.3",
     "pg-hstore": "^2.3.4",
+    "requirejs": "^2.3.6",
     "sequelize": "^6.32.1"
+  },
+  "scripts": {
+    "start": "node save.js"
   }
 }

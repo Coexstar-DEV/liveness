@@ -9,8 +9,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Open+Sans&display=swap" rel="stylesheet">
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
   <script defer src="face-api.min.js"></script>
-  <script defer src="script.js"></script>
 
   <style>
     body {
@@ -43,7 +44,8 @@
       margin-top: 20px;
     }
 
-    button {
+    button,
+    input {
       background: transparent;
       border: 1px solid rgb(210, 171, 102);
       font-family: "Open Sans" !important;
@@ -57,6 +59,30 @@
       border-radius: 30px;
     }
 
+    a.submission {
+      background: transparent;
+      border: 1px solid rgb(210, 171, 102);
+      font-family: "Open Sans" !important;
+      background: none;
+      border: none;
+      font-size: 14px;
+      padding: 10px 20px;
+      color: #333;
+      font-weight: 100;
+      background-color: #d2ab66;
+      border-radius: 30px;
+    }
+
+    input {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      column-gap: 1rem;
+      margin-top: 20px;
+      position: absolute;
+      z-index: 9999;
+    }
+
 
     #video {
       display: none;
@@ -64,7 +90,7 @@
 
     #start,
     #stop,
-    #submit,
+    #save,
     #retake,
     #one,
     #two {
@@ -110,44 +136,40 @@
 <body>
   <section class="frame">
 
-    <form id="livenessData">
-
-      <div class="video_canvas">
-        <div class="instructions" id="instructions">
-          <div id="one">
-            <img src="./resources/images/leftright.gif" class="gif" />
-            <h3>Move your head from left to right.</h3>
-          </div>
-
-
-          <div id="two">
-            <img src="./resources/images/updown.gif" class="gif" />
-            <h3>Move your head up and down.</h3>
-          </div>
-
+    <div class="video_canvas">
+      <div class="instructions" id="instructions">
+        <div id="one">
+          <img src="./resources/images/leftright.gif" class="gif" />
+          <h3>Move your head from left to right.</h3>
         </div>
 
-        <video id="video" name="video" width="720" height="560" autoplay muted></video>
-      </div>
 
-
-      <img src="./resources/images/Scan.png" class="logo" id="logo" />
-
-      <div class="button-group">
-        <button id="open">Start Liveness</button>
-        <button id="start">Start Recording</button>
-        <button id="stop">Stop Recording</button>
-        <button id="retake">Record again</button>
-
-        <a id="submit" type="submit" download="liveness.webm">Submit Video</a>
+        <div id="two">
+          <img src="./resources/images/updown.gif" class="gif" />
+          <h3>Move your head up and down.</h3>
+        </div>
 
       </div>
 
-    </form>
+      <video id="video" name="video" width="720" height="560" autoplay muted></video>
+    </div>
+
+
+    <img src="./resources/images/Scan.png" class="logo" id="logo" />
+
+    <div class="button-group">
+      <button id="open">Start Liveness</button>
+      <button id="start">Start Recording</button>
+      <button id="stop">Stop Recording</button>
+      <a id="save" download="test.webm">Save Video </a>
+      <a class="submission" href="http://localhost/live/liveness/submit.html">Proceed to submission</a>
+
+    </div>
 
   </section>
 
-
+  <script type="module" src="script.js"></script>
+  <script type="module" src="save.js"></script>
 </body>
 
 </html>

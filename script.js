@@ -7,7 +7,7 @@ let video = document.querySelector("#video");
 let logo = document.querySelector("#logo");
 let start = document.querySelector("#start");
 let stop = document.querySelector("#stop");
-let submit = document.querySelector("#submit");
+let save = document.querySelector("#save");
 
 //instructions
 
@@ -21,8 +21,6 @@ let blobs_recorded = [];
 
 
 //test data
-
-const email = "alexfacutila@gmail.com";
 
 
 //initiate face detector
@@ -54,8 +52,6 @@ start.addEventListener('click', function () {
   media_recorder = new MediaRecorder(camera, { mimeType: 'video/webm' });
   media_recorder.addEventListener('dataavailable', function (e) {
     blobs_recorded.push(e.data);
-
-    submit.style.display = 'none';
   }
   );
   one.style.display = "flex";
@@ -69,10 +65,7 @@ start.addEventListener('click', function () {
 
   media_recorder.addEventListener('stop', function () {
     let video_local = URL.createObjectURL(new Blob(blobs_recorded, { type: 'video/webm' }));
-    submit.href = video_local;
-
-    stop.style.display = 'none';
-    submit.style.display = 'block';
+    save.href = video_local;
 
   });
 
@@ -84,32 +77,20 @@ start.addEventListener('click', function () {
 stop.addEventListener('click', function () {
   media_recorder.stop();
   start.style.display = 'block';
+  save.style.display = 'block';
   start.innerHTML = 'Record Again';
+
+  stop.style.display = 'none';
+
+
   one.style.display = "none";
   two.style.display = "none";
+
 });
 
-document.getElementById("livenessData").addEventListener("submit", function (event) {
-  event.preventDefault();
+// Configure the PostgreSQL client
 
-  const email = "alexfalcutila@gmail.com";
-  const video = document.getElementById("video").value;
 
-  fetch('/insertFormData', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-    },
-    body: JSON.stringify({ email, video }),
-  })
-    .then(response => response.json())
-    .then(data => {
-      console.log('Data inserted:', data);
-    })
-    .catch(error => {
-      console.error('Error:', error);
-    });
-});
 
 
 //face detection algorithm
@@ -128,3 +109,4 @@ video.addEventListener('play', () => {
     faceapi.draw.drawFaceExpressions(canvas, resizedDetections)
   }, 100)
 })
+
